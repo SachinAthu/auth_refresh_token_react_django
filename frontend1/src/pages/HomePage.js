@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
+
 import AuthContext from '../context/AuthContext'
+import { BASE_URL } from '../utils/config'
+
 
 const HomePage = () => {
     const { authTokens, logoutUser } = useContext(AuthContext)
@@ -10,11 +13,11 @@ const HomePage = () => {
     }, [])
 
     const getNotes = async () => {
-        const res = await fetch('http://127.0.0.1:8000/api/notes', {
+        const res = await fetch(`${BASE_URL}/api/notes`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + String(authTokens.access) 
+                "Authorization": `Bearer ${authTokens.access}`
             }
         })
         const data = await res.json()
