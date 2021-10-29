@@ -13,25 +13,25 @@ const HomePage = () => {
     }, [])
 
     const getNotes = async () => {
-        const res = await fetch(`${BASE_URL}/api/notes`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${authTokens.access}`
+        try {
+            const res = await fetch(`${BASE_URL}/api/notes`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${authTokens.access}`
+                }
+            })
+            const data = await res.json()
+            if(res.status === 200) {
+                setNotes(data)
+            } else if(res.status === 401) {
+                logoutUser()
+            }else {
+                console.log("Getting notes failed!")
             }
-        })
-        const data = await res.json()
-        if(res.status === 200) {
-            setNotes(data)
-        } else if(res.status === 401) {
-            logoutUser()
-        }else {
-            console.log("Getting notes failed!")
+        } catch (err) {
+            console.log(err)
         }
-        // try {
-        // } catch (err) {
-        //     console.log(err)
-        // }
     }
 
     return (

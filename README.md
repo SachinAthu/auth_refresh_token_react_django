@@ -12,4 +12,7 @@
 #### frontend1 - periodically checks the token and update it using the refresh token. In this method, we must know the token timeout(lifetime) that configured from the backend.
 
 #### frontend2 - use axios interceptors to check token and refresh token
+
+#### frontend3 - use fetch custom interceptor to check token and refresh token
+
  
